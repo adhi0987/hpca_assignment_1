@@ -3,18 +3,18 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-# Define paths relative to the sweep_scripts directory
+
 csv_path = '../results/full_sweep_results/64/total_sweep_results.csv'
 output_dir = '../results/full_sweep_analysis'
 
-# Create output directory if it doesn't exist
+
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-# Load the sweep results
+
 df = pd.read_csv(csv_path)
 
-# 1. Summary Statistics for Key Metrics
+
 # Metrics: simTicks (Performance), L1D Hit Rate, L2D Hit Rate
 metrics = ['simTicks', 'L1D_hit_rate', 'L2D_hit_rate']
 stats = df[metrics].agg(['mean', 'min', 'max']).transpose()
@@ -25,7 +25,6 @@ stats.to_csv(os.path.join(output_dir, 'summary_statistics.csv'))
 # 2. Plotting Impact of L1D and L2 Sizes on Performance (simTicks)
 def create_impact_plot(param, title, filename):
     plt.figure(figsize=(10, 6))
-    # Boxplot shows performance distribution across different associativities for each size
     sns.boxplot(x=param, y='simTicks', data=df)
     plt.title(title)
     plt.xlabel(f'{param} (Bytes/KB)')
@@ -41,7 +40,6 @@ create_impact_plot('L2D_size', 'Impact of L2 Cache Size on Performance', 'l2_siz
 
 # 3. Associativity Impact Analysis
 plt.figure(figsize=(10, 6))
-# Pointplot to show the average trend across associativity levels
 sns.pointplot(x='L1_assoc', y='simTicks', data=df, label='L1 Associativity')
 sns.pointplot(x='L2_assoc', y='simTicks', data=df, color='orange', label='L2 Associativity')
 plt.title('Impact of Cache Associativity on Performance')

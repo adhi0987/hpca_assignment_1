@@ -18,11 +18,11 @@ MATRIX_SIZES = ["64"]
 run_id = 0
 for matrixsize in MATRIX_SIZES:
     results = []
-    # Create a subfolder for the specific matrix size results
+
     matrix_outdir = os.path.join(OUTDIR, matrixsize)
     os.makedirs(matrix_outdir, exist_ok=True)
     
-    # Update binary path based on current matrix size if necessary
+
     current_binary = f"{BINARY_BASE}{matrixsize}"
 
     for l1d in L1D_SIZES:

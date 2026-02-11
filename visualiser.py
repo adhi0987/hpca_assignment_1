@@ -3,15 +3,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-# --- PATH CONFIGURATION ---
-# Update these paths to match your local folder structure.
-# If your folders are inside a sub-directory, add it here.
-# Example: 'hpca_assignment_1-687ad940.../riscvO3CPU/...'
+
 o3_csv_path = 'riscvO3CPU/results/single_param_sweep/MATRIX_64/results.csv'
 timing_csv_path = 'riscvTimingSimpleCPU/results/single_param_sweep/MATRIX_64/results.csv'
 
 def generate_plots(o3_path, timing_path):
-    # Check if files exist
     if not os.path.exists(o3_path) or not os.path.exists(timing_path):
         print(f"Error: Could not find one of the CSV files.")
         print(f"Looking for: {os.path.abspath(o3_path)}")
@@ -27,7 +23,6 @@ def generate_plots(o3_path, timing_path):
     x = np.arange(len(l1_sizes))
     width = 0.35
 
-    # --- Plot 1: Execution Ticks (Performance) ---
     plt.figure(figsize=(10, 6))
     plt.bar(x - width/2, df_o3['Execution_Ticks'], width, label='O3CPU', color='skyblue')
     plt.bar(x + width/2, df_timing['Execution_Ticks'], width, label='TimingSimpleCPU', color='salmon')
@@ -36,11 +31,11 @@ def generate_plots(o3_path, timing_path):
     plt.ylabel('Execution Ticks (Log Scale)')
     plt.title('CPU Performance: Execution Ticks Comparison')
     plt.xticks(x, l1_sizes)
-    plt.yscale('log') # Log scale because TimingSimpleCPU is ~10x slower
+    plt.yscale('log') 
     plt.legend()
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     
-    # Save the performance plot
+
     plt.savefig('performance_comparison.png')
     print("Saved performance_comparison.png")
 
@@ -56,8 +51,6 @@ def generate_plots(o3_path, timing_path):
     plt.ylim(0, 1.1)
     plt.legend()
     plt.grid(axis='y', linestyle='--', alpha=0.7)
-    
-    # Save the cache plot
     plt.savefig('cache_hit_rate_comparison.png')
     print("Saved cache_hit_rate_comparison.png")
 

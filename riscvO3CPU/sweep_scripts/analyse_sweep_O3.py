@@ -2,10 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-# Path to the results file provided in your directory
+
 csv_file = '../results/single_param_sweep/MATRIX_256/results.csv'
 
-# Load data
+
 df = pd.read_csv(csv_file)
 
 # Plot 1: L1D Size vs Execution Time (Ticks)
