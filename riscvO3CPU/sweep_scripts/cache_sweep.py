@@ -2,18 +2,18 @@ import subprocess
 import os
 import csv
 
-GEM5 = "../../gem5/build/RISCV/gem5.opt"
-CONFIG = "../configs/cache_config.py"
-BINARY_BASE = "../benchmarks/matrix_multiply_" # Assuming binary name ends with size
+GEM5 = "../../../gem5/build/RISCV/gem5.opt"
+CONFIG = "../configs/cache_config_riscvO3CPU.py"
+BINARY_BASE = "../../benchmarks/matrix_multiply_" # Assuming binary name ends with size
 
 OUTDIR = "../results/full_sweep_results"
 os.makedirs(OUTDIR, exist_ok=True)
 
 L1D_SIZES = ["16kB", "32kB", "64kB"]
-L2_SIZES = ["128kB", "256kB", "512kB", "1MB"]
+L2_SIZES = ["128kB", "256kB", "512kB", "1024kB"]
 L1_ASSOCS = [2, 4, 8]
 L2_ASSOCS = [4, 8, 16]
-MATRIX_SIZES = ["64", "128", "256"]
+MATRIX_SIZES = ["64"]
 
 run_id = 0
 for matrixsize in MATRIX_SIZES:
